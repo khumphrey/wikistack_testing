@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 
 app.use('/wiki', require('./routes/wiki'));
 app.use('/users', require('./routes/users'));
-
+app.listen(3001);
 app.get('/', function (req, res) {
    res.render('index');
 });

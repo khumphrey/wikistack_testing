@@ -1,8 +1,6 @@
 var mocha = require('mocha');
 var expect = require('chai').expect;
 var chai = require('chai');
-var spies = require('chai-spies');
-chai.use(spies);
 var Page = require('../models').Page;
 
 
