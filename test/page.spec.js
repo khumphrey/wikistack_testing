@@ -1,6 +1,11 @@
+process.env.NODE_ENV = 'test';
 var mocha = require('mocha');
-var expect = require('chai').expect;
+usevar expect = require('chai').expect;
 var chai = require('chai');
+var chaiAsPromised = require("chai-as-promised");
+chai.should();
+chai.use(chaiAsPromised);
+
 var Page = require('../models').Page;
 
 
@@ -29,24 +34,37 @@ describe('Page model', function() {
     });
 
     describe('Statics', function() {
-        beforeEach(function(done) {
-            Page.create({
+        beforeEach(function() {
+           return Page.create({
                     title: 'I am a title',
                     content: 'blah',
                     tags: ['hi', 'unicorn']
-                }, done) //create takes an object and a callback that accepts an error and another input; 
-                //by using done, we are only looking at the error (even though multiple objects are passed)
+                }) 
         });
+
+
+
         afterEach(function(done) {
             Page.remove({}, done);
         })
         describe('findByTag', function() {
-            it('gets pages with the search tag', function(done) {
-                Page.findByTag('unicorn') //this returns an array of documents
-                    .then(function(page) {
-                        expect(page.length).to.equal(1);
-                        done();
-                    }).then(null, done);
+            it('gets pages with the search tag', function() {
+                
+
+
+   return Page.findByTag('unicorn').should.eventually.have.length(1);
+
+   //expect(Page.findByTag('unicorn')).should.eventually.have.length(1);
+
+// expect(Promise.resolve(2 + 2)).should.eventually.equal(4);
+
+
+				// Promise.resolve(2 + 2).should.eventually.equal(4);
+                // Page.findByTag('unicorn') //this returns an array of documents
+                //     .then(function(page) {
+                //         expect(page.length).to.equal(1);
+                //         done();
+                //     }).then(null, done);
             });
             it('does not get pages without the search tag', function(done) {
                 Page.findByTag() //this returns an array of documents
