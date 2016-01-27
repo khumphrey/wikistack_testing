@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon -e html,js,css ./server.js",
-    "test" : "mocha"
+    "test": "mocha"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "chai": "^3.4.1",
+    "chai-spies": "^0.7.1",
     "mocha": "^2.4.1",
     "nodemon": "^1.8.1"
   }
